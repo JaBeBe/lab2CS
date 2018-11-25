@@ -1,5 +1,5 @@
 using System;
-public class Pracownik
+public class Pracownik: IEquatable<Pracownik>, IComparable<Pracownik>
 {
     public string Nazwisko {get; set; }
     public DateTime DataZatrudnienia {get; set; }
@@ -35,5 +35,17 @@ public class Pracownik
         return (Nazwisko == other.Nazwisko && 
                 DataZatrudnienia == other.DataZatrudnienia &&
                 Wynagrodzenie == other.Wynagrodzenie);
+    }
+
+    public int CompareTo(Pracownik other)
+    {
+        if(other is null) return 1;
+
+        if(this.Nazwisko!=other.Nazwisko) return this.Nazwisko.CompareTo(other.Nazwisko);
+
+        if(this.DataZatrudnienia!=other.DataZatrudnienia) return this.DataZatrudnienia.CompareTo(other.DataZatrudnienia);  
+
+        return this.Wynagrodzenie.CompareTo(other.Wynagrodzenie); 
+        
     }
 }
